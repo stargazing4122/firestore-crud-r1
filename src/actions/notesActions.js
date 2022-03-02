@@ -3,7 +3,7 @@ import { getImageUrl } from '../utils/getImageUrl';
 import { db } from '../firebase/config';
 import { getNotesFromFirestore } from '../utils/getNotesFromFirestore';
 
-// * actions sincronos
+//  ACTIONS SINCRONOS
 export const doActiveNote = (note) => ({
   type: types.notesActiveNote,
   payload: { ...note },
@@ -24,13 +24,26 @@ export const doUpdateNote = (note) => ({
   payload: { ...note },
 });
 
+export const doDeleteNote = (id) => ({
+  type: types.notesDeleteNote,
+  payload: id,
+});
+
+export const doCleanActiveNote = () => ({
+  type: types.notesCleanActiveNote,
+});
+
 // ? muy extraño, payload no acepta [...notes]
 export const doLoadNotes = (notes) => ({
   type: types.notesLoadNotes,
   payload: notes,
 });
 
-// * actions asincronos
+export const doCleanNotesState = () => ({
+  type: types.notesCleanNotesState,
+});
+
+// ACTIONS ASINCRONOS
 export const startLoadNotes = () => {
   return async (dispatch, getState) => {
     const { uid } = getState().auth;
@@ -76,6 +89,19 @@ export const startUpdateNote = (note) => {
     try {
       await db.doc(`/${uid}/journal/notes/${note.id}`).update(noteToSend);
       dispatch(doUpdateNote(note));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const startDeleteNote = (id) => {
+  return async (dispatch, getState) => {
+    const { uid } = getState().auth;
+    try {
+      await db.doc(`/${uid}/journal/notes/${id}`).delete();
+      dispatch(doDeleteNote(id));
+      dispatch(doCleanActiveNote());
     } catch (err) {
       console.log(err);
     }

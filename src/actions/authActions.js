@@ -1,6 +1,7 @@
 import { types } from '../types/types';
 import { auth, googleAuthProvider } from '../firebase/config';
 import Swal from 'sweetalert2';
+import { doCleanNotesState } from './notesActions';
 // actions sincronos
 export const doAuthLogin = (uid, userName) => ({
   type: types.authLogin,
@@ -29,6 +30,7 @@ export const startLogout = () => {
   return async (dispatch) => {
     await auth.signOut();
     dispatch(doAuthLogout());
+    dispatch(doCleanNotesState());
     Swal.fire('Sesión cerrada', '¡Vuelva pronto!', 'error');
   };
 };

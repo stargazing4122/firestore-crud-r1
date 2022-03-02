@@ -1,6 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { startLogout } from '../../actions/authActions';
+import dayjs from 'dayjs';
+import 'dayjs/locale/es';
+
+dayjs.locale('es');
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -18,7 +22,9 @@ const Navbar = () => {
             <a className="navbar-brand note-navbar__name" href="#">
               JournalApp
             </a>
-            <span className="note-navbar__date">21 Julio 2021, Jueves</span>
+            <span className="note-navbar__date">
+              {dayjs().format('D MMMM YYYY[,] dddd')}
+            </span>
           </div>
           <div>
             <span className="me-3">{userName}</span>

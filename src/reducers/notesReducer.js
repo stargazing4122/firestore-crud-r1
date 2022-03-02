@@ -55,6 +55,24 @@ export const notesReducer = (state = initialState, action) => {
         ),
       };
 
+    case types.notesDeleteNote:
+      return {
+        ...state,
+        notes: state.notes.filter((note) => note.id !== action.payload),
+      };
+
+    case types.notesCleanActiveNote:
+      return {
+        ...state,
+        activeNote: null,
+      };
+
+    case types.notesCleanNotesState:
+      return {
+        notes: [],
+        activeNote: null,
+      };
+
     default:
       return state;
   }
