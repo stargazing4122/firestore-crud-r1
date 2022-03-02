@@ -37,7 +37,6 @@ const NoteView = () => {
   }, [activeNote]);
 
   useEffect(() => {
-    console.log('en el effect dispatch');
     dispatch(doUpdateActiveNote({ ...formValues }));
   }, [formValues]);
 

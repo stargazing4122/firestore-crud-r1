@@ -1,9 +1,19 @@
 import React from 'react';
 import dayjs from 'dayjs';
+import { useDispatch } from 'react-redux';
+import { doActiveNote } from '../../../actions/notesActions';
 
-const JournalEntry = ({ title, body, date }) => {
+const JournalEntry = (props) => {
+  //hooks
+  const { title, body, date } = props;
+  const dispatch = useDispatch();
+  //functions
+  const handleActiveNote = () => {
+    console.log('activando nota');
+    dispatch(doActiveNote({ ...props }));
+  };
   return (
-    <div className="journal-entry">
+    <div onClick={handleActiveNote} className="journal-entry">
       <div
         className="card text-white bg-dark mb-3"
         style={{ maxWidth: '18rem', height: '200px' }}

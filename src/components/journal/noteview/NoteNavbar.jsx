@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { startAddNote } from '../../../actions/notesActions';
+import { startAddNote, startUpdateNote } from '../../../actions/notesActions';
 
 const NoteNavbar = () => {
   //hooks
@@ -10,7 +10,7 @@ const NoteNavbar = () => {
   //functions
   const handleSaveNote = () => {
     if (activeNote?.id) {
-      console.log('actualizando nota');
+      dispatch(startUpdateNote(activeNote));
     } else {
       dispatch(startAddNote(activeNote));
     }

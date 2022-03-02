@@ -11,8 +11,8 @@ const Sidebar = () => {
   const handleAddNote = () => {
     const initialNote = {
       id: '',
-      title: 'nuevo titulo',
-      body: 'this is the body',
+      title: '',
+      body: '',
       date: new Date().getTime(),
       url: '',
     };

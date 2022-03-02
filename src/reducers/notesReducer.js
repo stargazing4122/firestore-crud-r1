@@ -38,13 +38,21 @@ export const notesReducer = (state = initialState, action) => {
     case types.notesAddNote:
       return {
         ...state,
-        notes: [...state.notes, { ...action.payload }],
+        notes: [{ ...action.payload }, ...state.notes],
       };
 
     case types.notesLoadNotes:
       return {
         ...state,
         notes: action.payload,
+      };
+
+    case types.notesUpdateNote:
+      return {
+        ...state,
+        notes: state.notes.map((note) =>
+          note.id === action.payload.id ? { ...action.payload } : note,
+        ),
       };
 
     default:

@@ -19,6 +19,11 @@ export const doAddNote = (note) => ({
   payload: { ...note },
 });
 
+export const doUpdateNote = (note) => ({
+  type: types.notesUpdateNote,
+  payload: { ...note },
+});
+
 // ? muy extraño, payload no acepta [...notes]
 export const doLoadNotes = (notes) => ({
   type: types.notesLoadNotes,
@@ -26,6 +31,13 @@ export const doLoadNotes = (notes) => ({
 });
 
 // * actions asincronos
+export const startLoadNotes = () => {
+  return async (dispatch, getState) => {
+    const { uid } = getState().auth;
+    const notes = await getNotesFromFirestore(uid);
+    dispatch(doLoadNotes(notes));
+  };
+};
 
 export const startUpdateUrlActiveNote = (file) => {
   return async (dispatch, getState) => {
@@ -56,10 +68,16 @@ export const startAddNote = (note) => {
   };
 };
 
-export const startLoadNotes = () => {
+export const startUpdateNote = (note) => {
   return async (dispatch, getState) => {
     const { uid } = getState().auth;
-    const notes = await getNotesFromFirestore(uid);
-    dispatch(doLoadNotes(notes));
+    const noteToSend = { ...note };
+    delete noteToSend.id;
+    try {
+      await db.doc(`/${uid}/journal/notes/${note.id}`).update(noteToSend);
+      dispatch(doUpdateNote(note));
+    } catch (err) {
+      console.log(err);
+    }
   };
 };
