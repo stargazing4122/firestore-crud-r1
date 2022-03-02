@@ -1,11 +1,15 @@
-import React from 'react'
+import React from 'react';
 
 const JournalScreen = () => {
   return (
-    <div>
+    <div className="container">
       <h1>Home of Journal Screen</h1>
-    </div>
-  )
-}
 
-export default JournalScreen
+      <button type="button" className="btn btn-secondary">
+        Logout
+      </button>
+    </div>
+  );
+};
+
+export default JournalScreen;
