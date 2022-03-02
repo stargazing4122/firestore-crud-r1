@@ -11,12 +11,12 @@ const NoteView = () => {
           <input
             className="notes-add__title"
             type="text"
-            placeholder="title"
+            placeholder="Título de tu nota"
             autoComplete="off"
           />
           <textarea
             className="notes-add__body"
-            placeholder="description of your note"
+            placeholder="Descripción de tu nota ..."
           ></textarea>
         </div>
         <img
@@ -24,8 +24,8 @@ const NoteView = () => {
           src="https://p4.wallpaperbetter.com/wallpaper/914/50/522/beautiful-space-the-universe-stars-galaxies-nebula-2560%C3%971440-wallpaper-preview.jpg"
           alt="universe"
         />
-        <button className="notes-add_button-save">
-          <i className="fa-solid fa-floppy-disk"></i>
+        <button className="btn btn-outline-success notes-add_button-upload">
+          Subir foto <i className="fa-solid fa-arrow-up-from-bracket"></i>
         </button>
       </div>
     </div>
