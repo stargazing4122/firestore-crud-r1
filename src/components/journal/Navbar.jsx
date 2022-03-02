@@ -14,9 +14,12 @@ const Navbar = () => {
     <div>
       <nav className="navbar navbar-expand-lg navbar navbar-dark bg-primary">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
-            Journal
-          </a>
+          <div>
+            <a className="navbar-brand note-navbar__name" href="#">
+              JournalApp
+            </a>
+            <span className="note-navbar__date">21 Julio 2021, Jueves</span>
+          </div>
           <div>
             <span className="me-3">{userName}</span>
             <button
