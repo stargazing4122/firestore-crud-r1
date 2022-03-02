@@ -9,7 +9,6 @@ const JournalEntry = (props) => {
   const dispatch = useDispatch();
   //functions
   const handleActiveNote = () => {
-    console.log('activando nota');
     dispatch(doActiveNote({ ...props }));
   };
   return (
