@@ -9,6 +9,7 @@ import PublicRoute from './PublicRoute';
 import ChekingScreen from '../components/checking/ChekingScreen';
 import { useDispatch } from 'react-redux';
 import { doAuthLogin } from '../actions/authActions';
+import { startLoadNotes } from '../actions/notesActions';
 
 const AppRouter = () => {
   //hooks
@@ -21,6 +22,7 @@ const AppRouter = () => {
       if (user?.uid) {
         setIsAuth(true);
         dispatch(doAuthLogin(user.uid, user.displayName));
+        dispatch(startLoadNotes());
       } else {
         setIsAuth(false);
       }

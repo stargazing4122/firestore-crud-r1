@@ -1,8 +1,9 @@
 import { types } from '../types/types';
 import { getImageUrl } from '../utils/getImageUrl';
 import { db } from '../firebase/config';
+import { getNotesFromFirestore } from '../utils/getNotesFromFirestore';
 
-// actions sincronos
+// * actions sincronos
 export const doActiveNote = (note) => ({
   type: types.notesActiveNote,
   payload: { ...note },
@@ -18,7 +19,14 @@ export const doAddNote = (note) => ({
   payload: { ...note },
 });
 
-//actions asincronos
+// ? muy extraño, payload no acepta [...notes]
+export const doLoadNotes = (notes) => ({
+  type: types.notesLoadNotes,
+  payload: notes,
+});
+
+// * actions asincronos
+
 export const startUpdateUrlActiveNote = (file) => {
   return async (dispatch, getState) => {
     const url = await getImageUrl(file);
@@ -45,5 +53,13 @@ export const startAddNote = (note) => {
         dispatch(doUpdateActiveNote(newNote));
       })
       .catch(console.log);
+  };
+};
+
+export const startLoadNotes = () => {
+  return async (dispatch, getState) => {
+    const { uid } = getState().auth;
+    const notes = await getNotesFromFirestore(uid);
+    dispatch(doLoadNotes(notes));
   };
 };

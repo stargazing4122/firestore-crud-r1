@@ -18,6 +18,7 @@ const NoteView = () => {
 
   const noteDateRef = useRef(activeNote.date);
   const noteUrlRef = useRef(activeNote.url);
+  const noteIdRef = useRef(activeNote.id);
   const inputFileRef = useRef();
 
   useEffect(() => {
@@ -28,6 +29,10 @@ const NoteView = () => {
     if (activeNote.url !== noteUrlRef.current) {
       reset(activeNote);
       noteUrlRef.current = activeNote.url;
+    }
+    if (activeNote.id !== noteIdRef.current) {
+      reset(activeNote);
+      noteIdRef.current = activeNote.id;
     }
   }, [activeNote]);
 

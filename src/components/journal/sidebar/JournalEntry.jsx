@@ -1,21 +1,19 @@
 import React from 'react';
+import dayjs from 'dayjs';
 
-const JournalEntry = () => {
+const JournalEntry = ({ title, body, date }) => {
   return (
     <div className="journal-entry">
       <div
         className="card text-white bg-dark mb-3"
         style={{ maxWidth: '18rem', height: '200px' }}
       >
-        <div className="card-header text-secondary">3 Noviembre</div>
+        <div className="card-header text-secondary">
+          {dayjs(date).format('D MMMM hh:mma')}
+        </div>
         <div className="card-body">
-          <h5 className="card-title text-info">
-            Aprendiendo React and Next js
-          </h5>
-          <p className="card-text">
-            Aprendiendo de los mejores, por ejemplo fernando herrera, juan de la
-            torre, jon mircha, midudev.
-          </p>
+          <h5 className="card-title text-info">{title}</h5>
+          <p className="card-text">{body}</p>
         </div>
       </div>
       {/* <div className="row journal-entry__title">
