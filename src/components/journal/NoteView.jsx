@@ -47,6 +47,7 @@ const NoteView = () => {
 
   const handleChangePhoto = (e) => {
     const file = e.target.files[0];
+    inputFileRef.current.value = '';
     dispatch(startUpdateUrlActiveNote(file));
   };
 
