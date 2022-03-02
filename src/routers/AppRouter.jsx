@@ -7,16 +7,20 @@ import JournalScreen from '../components/journal/JournalScreen';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 import ChekingScreen from '../components/checking/ChekingScreen';
+import { useDispatch } from 'react-redux';
+import { doAuthLogin } from '../actions/authActions';
 
 const AppRouter = () => {
   //hooks
   const [isAuth, setIsAuth] = useState(false);
   const [isChecking, setIsChecking] = useState(true);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user?.uid) {
         setIsAuth(true);
+        dispatch(doAuthLogin(user.uid, user.displayName));
       } else {
         setIsAuth(false);
       }
