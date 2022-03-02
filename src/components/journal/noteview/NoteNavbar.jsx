@@ -1,9 +1,20 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { startAddNote } from '../../../actions/notesActions';
 
 const NoteNavbar = () => {
   //hooks
   const { activeNote } = useSelector((state) => state.notes);
+  const dispatch = useDispatch();
+
+  //functions
+  const handleSaveNote = () => {
+    if (activeNote?.id) {
+      console.log('actualizando nota');
+    } else {
+      dispatch(startAddNote(activeNote));
+    }
+  };
   return (
     <div>
       <div>
@@ -13,7 +24,7 @@ const NoteNavbar = () => {
         >
           <i className="fa-solid fa-trash-can"></i>
         </button>
-        <button className="button-save">
+        <button onClick={handleSaveNote} className="button-save">
           <i className="fa-solid fa-floppy-disk"></i>
         </button>
       </div>
