@@ -28,7 +28,7 @@ export const startLogin = () => {
 export const startLogout = () => {
   return async (dispatch) => {
     await auth.signOut();
-    dispatch(doAuthLogout);
+    dispatch(doAuthLogout());
     Swal.fire('Sesión cerrada', '¡Vuelva pronto!', 'error');
   };
 };

@@ -1,26 +1,25 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { startLogout } from '../../actions/authActions';
+import React, { useState } from 'react';
+
+import Navbar from './Navbar';
+import Sidebar from './Sidebar';
+import NoteView from './NoteView';
+import NothingSelected from './NothingSelected';
 
 const JournalScreen = () => {
   //hooks
-  const dispatch = useDispatch();
+  const [noteActive, setNoteActive] = useState(true);
 
-  //functions
-  const handleLogout = () => {
-    dispatch(startLogout());
-  };
   return (
-    <div className="container">
-      <h1>Home of Journal Screen</h1>
-
-      <button
-        type="button"
-        className="btn btn-secondary"
-        onClick={handleLogout}
-      >
-        Logout
-      </button>
+    <div>
+      <Navbar />
+      <div className="row">
+        <div className="col-4 sidebar-content">
+          <Sidebar />
+        </div>
+        <main className="col-8">
+          {noteActive ? <NoteView /> : <NothingSelected />}
+        </main>
+      </div>
     </div>
   );
 };
