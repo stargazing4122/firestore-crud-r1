@@ -1,12 +1,25 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import Swal from 'sweetalert2';
+import { startLogin } from '../../actions/authActions';
 
 const LoginScreen = () => {
+  //hooks
+  const dispatch = useDispatch();
+
+  //functions
+
+  const handleLogin = () => {
+    dispatch(startLogin());
+  };
+
   return (
     <div className="login-container">
       <p className="login__icon">
         <i className="fa-solid fa-user"></i>Login
       </p>
-      <div className="login__button">
+
+      <div className="login__button" onClick={handleLogin}>
         <div className="google-btn">
           <div className="google-icon-wrapper">
             <img
